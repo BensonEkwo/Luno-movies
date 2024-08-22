@@ -42,7 +42,7 @@ export default function Home() {
             stopOnMouseEnter: true,
           }),
         ]}
-        className="md:hidden flex flex-row flex-shrink-0 mr-2 my-1 overflow-scroll ml-2  relative"
+        className="md:hidden  flex flex-row flex-shrink-0 mr-2 my-1 overflow-x-scroll overflow-y-visible ml-2  relative"
       >
         <CarouselContent className="">
           {movies.map((movie, index) => (
