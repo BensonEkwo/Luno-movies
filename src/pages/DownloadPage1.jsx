@@ -17,6 +17,7 @@ export default function DownloadPage1() {
   const { value5 } = useContext(myContext);
   const [watchlist, setWatchlist] = value5;
   const [film, setFilm] = useState([]);
+  const [episodes, setEpisodes] = useState([]);
   useEffect(() => {
     if (mediaType === "movie") {
       fetch(movieUrl)
@@ -80,7 +81,27 @@ export default function DownloadPage1() {
   const handleClick = (index) => {
     setClicked(index);
   };
-
+  const [seasonClicked,setSeasonClicked]= useState(null)
+  const [episodeClicked,setEpisodeClicked]= useState(null)
+  const [isClicked,setIsclicked]= useState(false)
+  const handleSeasonClick = (index) => {
+    const seasonUrl = `https://api.themoviedb.org/3/tv/${Id}/season/${index}?api_key=0a8e7dd4a181f960199fb0449537a9f6&language=en-US`;
+    fetch(seasonUrl)
+      .then((res) => res.json())
+      .then((data) => {
+        if (!data.errors) {
+          setEpisodes(data.episodes);
+        } else {
+          setEpisodes([]);
+        }
+        setIsclicked(true)
+        setSeasonClicked(index)
+        console.log(episodes)
+      });}
+      const errormessage='No Episode available for Download'
+      const handleEpisodeClicked=(index)=>{
+        setEpisodeClicked(index)
+      }
   return (
     <div className="flex-col mx-0 h-screen ">
       <div
@@ -94,10 +115,10 @@ export default function DownloadPage1() {
             alt={film.title}
           ></img>
         </div>
-        <div className="flex items-center justify-center absolute bottom-0 left-5 flex-grow">
-          <h2 className="rounded-lg p-2">
+        <div className="flex items-center justify-center absolute bottom-0 left-5 flex-wrap">
+          <h2 className="rounded-lg p-2 ">
             {film.genres?.map((genre) => (
-              <span className="space-x-2 font-semibold mx-1 border-4 border-neutral-900 rounded-lg p-1 text-sm">
+              <span className="space-x-2 font-semibold mx-1 border-4 border-neutral-900 rounded-lg p-1 text-sm inline-block whitespace-normal">
                 {genre.name}
               </span>
             ))}
@@ -114,22 +135,49 @@ export default function DownloadPage1() {
           })`}</span>
         </h3>
       </div>
+      <div>
+        <h3 className="space-x-2 ml-2">
+          {film.seasons?.map((season, index) => (
+            <button
+              key={index}
+              onClick={()=>handleSeasonClick(index)}
+              className={` rounded-xl p-1 ${seasonClicked===index? 'bg-cyan-700': 'bg-cyan-500'}`}
+            >
+              {season.name}
+            </button>
+          ))}
+        </h3>
+        {isClicked && 
+        <h3 className="space-x-3 ml-4 my-3 space-y-2">
+          <p className="text-sm font-semibold">Episodes:</p>
+         {episodes?.map((episode,index)=>(
+          <button key={index} onClick={()=>handleEpisodeClicked(index)} className={` rounded-lg px-2 ${episodeClicked===index? 'bg-cyan-950' : 'bg-cyan-600'} `}>{episode.episode_number }</button>
+         ))?? errormessage}
+
+        </h3>}
+      </div>
       <h3 className="ml-12 mb-1">Quality:</h3>
 
-      {disk? disk?.map((disk, index) => (
-        <button
-          key={index}
-          onClick={() => {
-            setLink(disk?.url);
-            handleClick(index);
-          }}
-          className={`bg-purple-500 p-1 px-4 ml-3 mb-4 rounded-lg ${
-            clicked === index && "bg-purple-900"
-          }`}
-        >
-          {disk?.quality}
-        </button>
-      )):<h3 className="ml-8 mb-4">sorry no torrent file available for download, check back later</h3>}
+      {disk ? (
+        disk?.map((disk, index) => (
+          <button
+            key={index}
+            onClick={() => {
+              setLink(disk?.url);
+              handleClick(index);
+            }}
+            className={`bg-cyan-500 p-1 px-4 ml-3 mb-4 rounded-lg ${
+              clicked === index && "bg-cyan-800"
+            }`}
+          >
+            {disk?.quality}
+          </button>
+        ))
+      ) : (
+        <h3 className="ml-8 mb-4">
+          sorry no torrent file available for download, check back later
+        </h3>
+      )}
 
       <div className="flex  gap-5 relative">
         <button

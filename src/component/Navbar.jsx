@@ -44,9 +44,9 @@ const Navbar = () => {
           </span>
           <span className="inline-block font-semibold text-xl">luno</span>
           <div className="ml-4 md:ml-8">
-            <form  onFocus={focusin}  className={`group relative rounded-xl py-1 md:py-2 px-2 md:min-w-[50vw] max-w-[50vw] bg-slate-700  items-start flex justify-between leading-tight ${focus&&'border-2 border-slate-200 '} `}>
+            <form  onFocus={focusin}  className={`group relative rounded-xl py-1 md:py-2 px-2 md:min-w-[50vw] max-w-[50vw] bg-slate-700  items-start flex justify-between leading-tight ${focus&&'border-2 border-slate-200 scale-105 transition-all ease-in-out'} `}>
               <input
-                className={`focus:outline-none bg-transparent min-w-full text-sm font-normal${focus&&' scale-105 transition-all ease-in-out'}`}
+                className={`focus:outline-none bg-transparent min-w-full text-sm font-normal`}
                 type="text"
                 value={value}
                 placeholder="search"
@@ -88,8 +88,8 @@ const Navbar = () => {
           </button>
         </div>
       </nav>
-     {isOpen&&
-       <div className={`md:hidden fixed h-screen bg-slate-900/90 min-w-[50vw] flex flex-col  items-center right-0 p-4 top-7 mt-4 z-50 ${isOpen? 'transition-transform duration-300 ease-in-out translate-x-0 ':'transition-transform duration-300 -translate-x-full'}`} >
+     {
+       <div className={`md:hidden fixed h-screen bg-slate-900/90 min-w-[50vw] flex flex-col  items-center left-0 p-4 top-7 mt-4 z-50 -translate-x-full ${isOpen? 'transition-transform duration-300 ease-in-out translate-x-0 ':'transition-transform duration-300 -translate-x-full'}`} >
       <div className="flex flex-col space-y-8 font-semibold mt-4"> 
       <Link  to='/' className="text-white text-3xl flex hover:text-blue-200">
       <IoHome />

@@ -37,7 +37,7 @@ useEffect(()=>{
         }
         catch(error){
             console.error('error fetching data:', error);
-            setseries([])
+            setSeries([])
         }
     }
     fetchItems();

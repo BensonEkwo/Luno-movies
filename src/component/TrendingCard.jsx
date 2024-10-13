@@ -1,14 +1,13 @@
 import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { genres } from "./genre";
+import { genres,http } from "./genre";
 
 export default function TrendingCard({films}) {
   const [isHover, setIsHover] = useState(false);
   const Onhover = () => {
     setIsHover(!isHover);
   };
-  const http = "http://image.tmdb.org/t/p/w300";
   return (
     <div
       onMouseEnter={Onhover} onMouseLeave={Onhover}
