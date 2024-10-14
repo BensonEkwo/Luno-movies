@@ -136,7 +136,7 @@ export default function DownloadPage1() {
         </h3>
       </div>
       <div>
-        <h3 className="space-x-2 ml-2">
+        <h3 className="space-x-3 ml-2 space-y-2">
           {film.seasons?.map((season, index) => (
             <button
               key={index}
