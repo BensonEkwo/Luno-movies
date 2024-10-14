@@ -6,14 +6,14 @@ import Home from "./pages/Home.jsx";
 import Categories from "./pages/Categories.jsx";
 import Watchlist from "./pages/Watchlist.jsx";
 import Tvshows from "./pages/Tvshows.jsx";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createHashRouter, RouterProvider } from "react-router-dom";
 import Subcategory from "./pages/Subcategory.jsx";
 import DownloadPage1 from "./pages/DownloadPage1.jsx";
  
 export const myContext = createContext();
 
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     element: <App />,
     children: [
