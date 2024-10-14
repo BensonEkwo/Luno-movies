@@ -44,7 +44,7 @@ const Navbar = () => {
           </span>
           <span className="inline-block font-semibold text-xl">luno</span>
           <div className="ml-4 md:ml-8">
-            <form  onFocus={focusin}  className={`group relative rounded-xl py-1 md:py-2 px-2 md:min-w-[50vw] max-w-[50vw] bg-slate-700  items-start flex justify-between leading-tight ${isSearchOpen&&'border-2 border-slate-200 scale-105 transition-all ease-in-out'} `}>
+            <form  onFocus={focusin}  className={`group relative rounded-xl py-1 md:py-2 px-2 md:min-w-[50vw] max-w-[50vw] bg-slate-700  items-start flex justify-between leading-tight ${isSearchOpen?'border-2 border-slate-200 scale-105 transition-all ease-in-out':'scale-100 border-none '} `}>
               <input
                 className={`focus:outline-none bg-transparent min-w-full text-sm font-normal`}
                 type="text"
